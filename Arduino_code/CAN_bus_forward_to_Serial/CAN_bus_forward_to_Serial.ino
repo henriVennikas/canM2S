@@ -35,9 +35,8 @@ void loop() {
      for (int i = 0; i<canMsg.can_dlc; i++)  {  // print the data
           
         Serial.print(canMsg.data[i],HEX);
-        //if(i<canMsg.can_dlc-1){
-          Serial.print(",");
-        //}
+        Serial.print(",");
+      
      }
   
      Serial.println();      
