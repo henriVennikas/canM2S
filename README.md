@@ -8,7 +8,7 @@ Processing script: opens serial port and listens for data.
 
 Operating logic:
 1) Buffer data from serial until new line
-2) Split the buffer to individual values array
+2) Split the buffer to array of individual values
 3) Create a temporary message object
 4) Compare temporary message object to array list of received messages, if same ID exists in array, if not, then add entire message
 5) If message ID is present in array list, compare data of received message and the one in array list, if equal then discard
