@@ -1,5 +1,7 @@
 import java.util.Comparator;
 
+// msg object - these are stored in the array list. Each object is a set of integer values. dlc and d0-d7 could actually be byte values, but unsigned bytes seem not to be supported.
+
 public class msg implements Comparable<msg>{
  
   private Integer id, dlc, d0, d1, d2, d3, d4, d5, d6, d7;
