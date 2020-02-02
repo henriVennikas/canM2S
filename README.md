@@ -1,3 +1,6 @@
+Usage - use an Arduino and Processing to visualize data in a CAN network, might be useful for reverse engineering or just confirming data in a controller area network.
+
+
 Arduino script: based on the mcp2515 library example. Passes messages from CAN bus to serial bus.
 
 
