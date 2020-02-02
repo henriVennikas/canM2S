@@ -4,6 +4,7 @@ import java.util.*;
 Serial port;
 
 String data=null;                //old was info
+String comm="COM4";     //COM port that your arduino is connected to
 ArrayList <msg> msgs;
 msg id_check;
 int id_element;
@@ -13,6 +14,7 @@ int f, bl = 0;         // f - fill, bl - baseline for non zero values
 PFont font;
 long timestamp;
 
+
 //*********************************************************************************************************//
 
 void setup(){
@@ -20,7 +22,7 @@ void setup(){
    
    size(1800, 900);
    
-   port = new Serial(this, "COM4", 115200);
+   port = new Serial(this, comm, 115200);
    
    port.bufferUntil('\n');
 
@@ -69,10 +71,7 @@ void draw(){
       } else{
         bl=0;
       }
-         
-      //fill(255, 255, 255);
-      //rect(a*2+col,row,a,a);
-      
+               
       fill(0, bl, 0);
       textFont(font, a*0.6);
       text(hex(f,2), a*2+col+a/2, a*.75+row);
@@ -83,7 +82,7 @@ void draw(){
     
     fill(0, 0, 0);
     text(hex(msgs.get(x).id,3), a+coffs, a*.75+row);
-    //text(msgs.get(x).dlc, 2.2*a+coffs, a*.75+row);
+    //text(msgs.get(x).dlc, 2.2*a+coffs, a*.75+row); // toggle line comment to enable DLC value after message ID
   }
 }
 

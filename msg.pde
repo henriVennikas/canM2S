@@ -42,30 +42,4 @@ public class msg implements Comparable<msg>{
       Integer cmprid = ((msg)m).getmsgid();
       return thisid.compareTo(cmprid);
     }
-    
-    
-  //  public Comparator<msg> msgcmpid = new Comparator<msg>() {
-
-  //  public int compare(msg m1, msg m2) {
-
-  //   int cmprid1 = m1.getmsgid();
-  //   int cmpdid2 = m2.getmsgid();
-
-  //   /*For ascending order*/
-  //   return cmprid1-cmpdid2;
-
-  //   /*For descending order*/
-  //   //rollno2-rollno1;
-  //   }};
-  
- //    @Override
- //   public int compareTo(msg comparemsg) {
- //       Integer compareid=((msg)comparemsg).getmsgid();
- //       /* For Ascending order*/
- //       return this.id-compareid;
-
- //       /* For Descending order do like this */
- //       //return compareage-this.studentage;
- //}
-
 }
