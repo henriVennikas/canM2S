@@ -2,6 +2,7 @@
 Is a processing script tested on win10 and [Processing 3.5.4](https://processing.org/)
 
 ## Usage
+![topology](https://github.com/henriVennikas/canM2S/blob/master/topology.png)
 Use an Arduino and Processing to visualize data in a CAN network, might be useful for reverse engineering or just confirming data in a controller area network.
 
 ![screenshot](https://github.com/henriVennikas/canM2S/blob/master/screenshot.png)
