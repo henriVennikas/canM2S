@@ -2,7 +2,7 @@
 
 /*
  * Use desired CAN interface and library as long as the data is passed to serial
- * comma separated in the following order ID,DCL,D0,D1,D2,D3,D4,D5,D6,D7, (note the last comma as well)
+ * comma separated in the following order ID,DLC,D0,D1,D2,D3,D4,D5,D6,D7, (note the last comma as well)
  * serial speed must match Processing script serial speed, for automotive use > 115200 seems to work sufficiently
  */
 
