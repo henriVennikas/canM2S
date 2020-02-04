@@ -119,18 +119,18 @@ public void serialEvent (Serial port){
         if((tm[1]>0)&&(tm[1]<9)){  //avoid gibberish
           
           int[] ts = new int[8];  
-          
-          
-          msg tmsg = new msg(tm[0], tm[1], tm[2], tm[3], tm[4], tm[5], tm[6], tm[7], tm[8], tm[9], millis(), null); //temporary msg object for searching arraylist for matches with current id
+         
+          msg tmsg = new msg(tm[0], tm[1], tm[2], tm[3], tm[4], tm[5], tm[6], tm[7], tm[8], tm[9], 1, millis(), null); //temporary msg object for searching arraylist for matches with current id
                  
           int is_id = msgs.indexOf(tmsg);
           
             if(is_id == -1){    // if ID is not present in the arraylist then add the entire message
-              msgs.add(tmsg); //(new msg(tm[0], tm[1], tm[2], tm[3], tm[4], tm[5], tm[6], tm[7], tm[8], tm[9])); // why not add tmsg?
+              msgs.add(tmsg);   //(new msg(tm[0], tm[1], tm[2], tm[3], tm[4], tm[5], tm[6], tm[7], tm[8], tm[9])); // why not add tmsg?
  
               Collections.sort(msgs); // sort the arraylist to keep the ID based order
 
             } else {   // for timing purposes do not check if messages are identical, just overwrite it with timing info if(msgs.get(is_id) != tmsg){ // if the message is identical? 
+              tmsg.cnt = msgs.get(is_id).cnt++;    // add +1 to message occurance counter
               tmsg.tf =  tmsg.t-msgs.get(is_id).t; // calculate frequency of message in milliseconds from the previous time
               msgs.set(is_id, tmsg); 
             }
