@@ -4,12 +4,12 @@ import java.util.Comparator;
 
 public class msg implements Comparable<msg>{
  
-  private Integer id, dlc, d0, d1, d2, d3, d4, d5, d6, d7, t, tf;
+  private Integer id, dlc, d0, d1, d2, d3, d4, d5, d6, d7, cnt, tf, t; // add c
   
 
   public msg(Integer id, Integer dlc, Integer d0, Integer d1, 
              Integer d2, Integer d3, Integer d4, Integer d5, 
-             Integer d6, Integer d7, Integer t, Integer tf){
+             Integer d6, Integer d7, Integer cnt, Integer tf, Integer t){
                
     super();
     this.id = id;
@@ -22,8 +22,9 @@ public class msg implements Comparable<msg>{
     this.d5 = d5;
     this.d6 = d6;
     this.d7 = d7;
-    this.t = t;
+    this.cnt = cnt;
     this.tf = tf;
+    this.t = t;
     
   }
   
