@@ -11,7 +11,7 @@ Use an Arduino and Processing to visualize data in a CAN network, might be usefu
 Message ID, data bytes, counter in red and frequency in blue (frequency is average time in milliseconds) 
 
 ## Arduino script
-Based on the mcp2515 library example. Passes messages from CAN bus to serial bus.
+Based on the [mcp2515 library](https://github.com/autowp/arduino-mcp2515) example. Passes messages from CAN bus to serial bus.
 
 
 ## Processing script
