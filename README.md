@@ -1,5 +1,6 @@
 # CAN Messages to Screen (canM2S)
 Is a processing script tested on win10 and [Processing 3.5.4](https://processing.org/)
+Note that in order to run the script on your desktop, contaning folder must have the same name as script file.
 
 ## Usage
 ![topology](https://github.com/henriVennikas/canM2S/blob/master/topology.png)
