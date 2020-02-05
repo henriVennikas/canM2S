@@ -12,11 +12,11 @@ Serial port;
 
 int w = 3600;                          // window height
 int h = 1800;                          // window width
-int c = 25;                            // column length, number of rows in one colum 
+int c = 20;                            // column length, number of rows in one colum 
 int a = floor(h/(c*1.1));              // calculate row height to match the amount of rows provided above
 
 String data = null;                    // incoming data from Serial port
-String comm = "COM5";                  // COM port that your arduino is connected to
+String comm = "COM4";                  // COM port that your arduino is connected to
 int speed = 115200;                    // serial port baud rate, must match setting on the arduino
 
 ArrayList <msg> msgs;                  // array list for storing and sorting received messages
@@ -29,7 +29,7 @@ PFont font;
 
 void setup(){
    msgs = new ArrayList<msg>();              // initialize array list with elements of objects of msg
-   size(w, h);                               // window size, modify if necessary
+   size(3600, 1800);                               // window size, modify if necessary
    port = new Serial(this, comm, speed);     // open serial port
    port.bufferUntil('\n');                   // listen serial until newline character appears, probably capturing a message
    font = loadFont("LiberationMono-48.vlw"); // use some font for drawing text
@@ -47,11 +47,10 @@ void draw(){
       
       f=0;                                       // fill value for coloring message text
       
-      coffs = floor(x/25)*a*14;                  // column  offset, for each 20 messages on screen, start a new column
-      roffs = floor(x/25)*25;                    // row offset, for each 20 messages start from 1st row
+      coffs = floor(x/c)*a*16;                  // column  offset, for each 20 messages on screen, start a new column
+      roffs = floor(x/c)*c;                    // row offset, for each 20 messages start from 1st row
       
       row = 20+(x-roffs)*a*1.1;                  // padding value + multiple of no. message - offset * some more padding
-      
       col = 20+y*1.1*a+coffs;                    // padding value + multiple of no. data byte * some padding + column offset
 
       if (y==7){                // not so fancy method for getting databyte value and assigning it to fill value
@@ -77,21 +76,42 @@ void draw(){
       } else{
         bl=0;
       }
+      
                
-      fill(0, bl, 0);            // draw databyte values
-      textFont(font, a*0.6);
-      text(hex(f,2), a*2+col+a/2, a*.75+row);
-      textAlign(CENTER);
-      fill(0,0,0);
+      if(y<msgs.get(x).dlc){  
+        fill(0, bl, 0);            // draw databyte values
+        textFont(font, a*0.6);
+        text(hex(f,2), a*2+col+a/2, a*.75+row);
+        textAlign(CENTER);
+        fill(0,0,0);
+      } else if (y == msgs.get(x).dlc){
+        col = 20+8*1.1*a+coffs; // make the count reading line up in a column on the right side
+        fill(150,bl, 0);            // draw databyte values
+        textFont(font, a*0.3);
+        text("x "+msgs.get(x).cnt, a*2.2+col+a/2, a*.75+row);
+        textAlign(LEFT);
+        fill(0,0,0);
            
+      } else if (y == msgs.get(x).dlc+1){
+        col = 20+9*1.1*a+coffs; 
+        fill(0, bl, 150);            // draw databyte values
+        textFont(font, a*0.3);
+        text(msgs.get(x).tf+" ms", a*2.3+col+a/2, a*.75+row);
+        textAlign(LEFT);
+        fill(0,0,0);
+           
+      }
+      
+      //row = 20+(x-roffs)*a*1.1;                  // padding value + multiple of no. message - offset * some more padding
+      //col = 20+y*1.1*a+coffs;                    // padding value + multiple of no. data byte * some padding + column offset
+
+      textFont(font, a*0.6);
+      fill(0, 0, 0); 
+      text(hex(msgs.get(x).id,3), a+coffs, a*.75+row); // draw message ID values
+      //text(msgs.get(x).dlc, 2.2*a+coffs, a*.75+row); // toggle line comment to enable DLC value after message ID
     }
-    
-    fill(0, 0, 0); 
-    text(hex(msgs.get(x).id,3), a+coffs, a*.75+row); // draw message ID values
-    //text(msgs.get(x).dlc, 2.2*a+coffs, a*.75+row); // toggle line comment to enable DLC value after message ID
   }
 }
-
 
 
 //*********************************************************************************************************//
@@ -120,7 +140,7 @@ public void serialEvent (Serial port){
           
           int[] ts = new int[8];  
          
-          msg tmsg = new msg(tm[0], tm[1], tm[2], tm[3], tm[4], tm[5], tm[6], tm[7], tm[8], tm[9], 1, millis(), null); //temporary msg object for searching arraylist for matches with current id
+          msg tmsg = new msg(tm[0], tm[1], tm[2], tm[3], tm[4], tm[5], tm[6], tm[7], tm[8], tm[9], 1, 0, millis()); //temporary msg object for searching arraylist for matches with current id
                  
           int is_id = msgs.indexOf(tmsg);
           
@@ -130,8 +150,8 @@ public void serialEvent (Serial port){
               Collections.sort(msgs); // sort the arraylist to keep the ID based order
 
             } else {   // for timing purposes do not check if messages are identical, just overwrite it with timing info if(msgs.get(is_id) != tmsg){ // if the message is identical? 
-              tmsg.cnt = msgs.get(is_id).cnt++;    // add +1 to message occurance counter
-              tmsg.tf =  tmsg.t-msgs.get(is_id).t; // calculate frequency of message in milliseconds from the previous time
+              tmsg.cnt = msgs.get(is_id).cnt+1;    // add +1 to message occurance counter
+              tmsg.tf =  floor(tmsg.t/tmsg.cnt); // calculate frequency of message in milliseconds from the previous time
               msgs.set(is_id, tmsg); 
             }
         }
