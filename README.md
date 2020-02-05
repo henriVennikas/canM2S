@@ -6,7 +6,7 @@ Is a processing script tested on win10 and [Processing 3.5.4](https://processing
 
 Use an Arduino and Processing to visualize data in a CAN network, might be useful for reverse engineering or just confirming data in a controller area network.
 
-![screenshot](https://github.com/henriVennikas/canM2S/blob/master/screenshot.gif)
+![screenshot](https://github.com/henriVennikas/canM2S/blob/tf/screenshot.gif)
 Message ID, data bytes, counter in red and frequency in blue (frequency is average time in milliseconds) 
 
 ## Arduino script
