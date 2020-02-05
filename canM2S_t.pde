@@ -86,25 +86,25 @@ void draw(){
         fill(0,0,0);
       } else if (y == msgs.get(x).dlc){
         col = 20+8*1.1*a+coffs; // make the count reading line up in a column on the right side
+        textAlign(LEFT);
         fill(150,bl, 0);            // draw databyte values
         textFont(font, a*0.3);
-        text("x "+msgs.get(x).cnt, a*2.2+col+a/2, a*.75+row);
-        textAlign(LEFT);
+        text("x "+msgs.get(x).cnt, a*2.3+col+a/2, a*.75+row);
         fill(0,0,0);
            
       } else if (y == msgs.get(x).dlc+1){
-        col = 20+9*1.1*a+coffs; 
+        col = 20+9.5*1.1*a+coffs; 
+        textAlign(LEFT);
         fill(0, bl, 150);            // draw databyte values
         textFont(font, a*0.3);
-        text(msgs.get(x).tf+" ms", a*2.3+col+a/2, a*.75+row);
-        textAlign(LEFT);
+        text(msgs.get(x).tf+" ms", a*2.4+col+a/2, a*.75+row);
         fill(0,0,0);
            
       }
       
       //row = 20+(x-roffs)*a*1.1;                  // padding value + multiple of no. message - offset * some more padding
       //col = 20+y*1.1*a+coffs;                    // padding value + multiple of no. data byte * some padding + column offset
-
+      textAlign(CENTER);
       textFont(font, a*0.6);
       fill(0, 0, 0); 
       text(hex(msgs.get(x).id,3), a+coffs, a*.75+row); // draw message ID values
